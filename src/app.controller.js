@@ -4,6 +4,7 @@ import express from "express"
 import checkConnection from './DB/db.connection.js'
 import { globalErrorHandler } from './utils/response.js'
 import authController from './modules/auth/auth.controller.js'
+import userController from './modules/user/user.controller.js'
 import cors from 'cors'
 dotenv.config({ path: path.join('./src/config/.env.dev') })
 
@@ -23,7 +24,7 @@ const bootstrap = async () => {
     })
     app.use('/auth', authController)
     
-    // app.use('/user', userController)
+    app.use('/user', userController)
     app.all('/*dummy', (req, res) => {
         res.status(404).json({ message: "In-valid app routing ❌" })
     })

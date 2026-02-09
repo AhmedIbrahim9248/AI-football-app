@@ -56,7 +56,7 @@ export const decodedToken = async ({
     let signatures=await getSignatures({
         signatureLevel:bearer
     })
-    console.log(signatures);
+    // console.log(signatures);
 
     const checkTokenType= tokenType ===tokenTypeEnum.access?
     signatures.accessSignature : signatures.refreshSignature
