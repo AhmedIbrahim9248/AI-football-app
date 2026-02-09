@@ -1,0 +1,58 @@
+import scoutingController from './modules/scouting/scouting.controller.js'
+
+app.use('/api/scouting', scoutingController)
+```
+
+---
+
+## **📁 Project Structure الكامل:**
+```
+Samart football analyst/
+│
+├── backend-nodejs/
+│   ├── src/
+│   │   ├── modules/
+│   │   │   ├── auth/          ✅ (موجود)
+│   │   │   ├── user/          ✅ (موجود)
+│   │   │   └── scouting/      🆕 (جديد - Proxy to Flask)
+│   │   │       ├── scouting.controller.js
+│   │   │       └── scouting.service.js
+│   │   ├── DB/
+│   │   │   └── models/
+│   │   │       ├── userModel.js     ✅
+│   │   │       └── playerModel.js   🆕 (للاعبين المحفوظين)
+│   │   └── ...
+│   └── package.json
+│
+├── backend-flask/          🆕 (AI Model API)
+│   ├── app.py
+│   ├── data/
+│   │   └── scouting_data.csv
+│   └── requirements.txt
+│
+└── frontend/              (سيأتي لاحقاً)
+```
+
+---
+
+## **🎯 User Journey (كيف يستخدمه الـ Coach):**
+
+### **Scenario 1: AI Scouting**
+```
+1. Coach يفتح صفحة Scouting
+2. يختار Role: "Striker (Complete)"
+3. يحدد Budget: €60M
+4. يحدد Max Age: 25
+5. الـ Frontend يستدعي /api/scout
+6. يعرض Top 50 لاعب مع Scout Score
+7. Coach يختار لاعب → يضيفه لـ "My Players" (Database)
+```
+
+### **Scenario 2: Find Similar Players**
+```
+1. Coach عنده لاعب مصاب
+2. يبحث عن بديل مشابه
+3. يدخل اسم اللاعب: "Mohamed Salah"
+4. الـ Frontend يستدعي /api/clone
+5. يعرض 15 لاعب مشابه مع Similarity %
+6. Coach يختار البديل
