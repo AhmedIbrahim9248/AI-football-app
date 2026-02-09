@@ -73,5 +73,7 @@ userSchema.virtual("fullName")
     });
 
 
-export const userModel = mongoose.models.User || mongoose.model("user", userSchema)
+export const userModel =
+    mongoose.models.user || mongoose.model("user", userSchema);
+
 userModel.syncIndexes()    //update the index automatically

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import * as DBservice from '../../DB/db.services.js'
-import { roleEnum, userModel } from '../../DB/models/userModel.js'
+import {roleEnum, userModel} from '../../DB/models/userModel.js'
 export const tokenTypeEnum = { access: "access", refresh: "refresh" }
 export const signatureLevelEnum = { bearer: "Bearer", system: "System" }
 
@@ -53,39 +53,39 @@ export const decodedToken = async ({
         return next(new Error("missing token parts", { cause: 401 }))
     }
 
-    let signatures = await getSignatures({
-        signatureLevel: bearer
+    let signatures=await getSignatures({
+        signatureLevel:bearer
     })
     console.log(signatures);
 
-    const checkTokenType = tokenType === tokenTypeEnum.access ?
-        signatures.accessSignature : signatures.refreshSignature
+    const checkTokenType= tokenType ===tokenTypeEnum.access?
+    signatures.accessSignature : signatures.refreshSignature
 
-    const decoded = await verifyToken({
+    const decoded= await verifyToken({
         token,
-        signature: checkTokenType
+        signature:checkTokenType
     })
 
     if (!decoded?._id) {
-        return next(new Error("in_valid token ", { cause: 400 }))
+        return next (new Error("in_valid token ",{cause:400}))
 
     }
 
-    const user = await DBservice.findById({
-        model: userModel,
-        id: decoded._id
+    const user =await DBservice.findById({
+        model:userModel,
+        id:decoded._id
     })
 
     if (!user) {
-        return next(new Error("in_valid register account"))
+        return next (new Error("in_valid register account"))
     }
     return user
 }
 
-export const generateLoginCredential = async ({ user } = {}) => {
+export const generateLoginCredintials = async ({ user } = {}) => {
 
-    const checkRole = user.role !== roleEnum.fan ? 
-    signatureLevelEnum.system : signatureLevelEnum.bearer
+    const checkRole = user.role !== roleEnum.fan ?
+     signatureLevelEnum.system : signatureLevelEnum.bearer
 
     let signatures = await getSignatures({
         signatureLevel: checkRole
