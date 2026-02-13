@@ -1,6 +1,6 @@
 import * as userService from './user.service.js'
 import { Router } from 'express'
-import { authentication } from '../../middleWares/authentication.middleware.js'
+import { authentication } from '../../middleWares/auth.middleware.js'
 import { tokenTypeEnum } from '../../utils/security/token.security.js'
 const router = Router()
 

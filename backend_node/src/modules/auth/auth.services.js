@@ -1,4 +1,4 @@
-import { userModel } from "../../DB/models/UserModel.js";
+import { userModel } from "../../DB/models/userModel.js";
 import { asyncHandler, successResponse } from "../../utils/response.js";
 import * as DBservice from '../../DB/db.services.js';
 import * as encryptionSecurity from '../../utils/security/encrypt.security.js'

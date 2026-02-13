@@ -5,7 +5,9 @@ import checkConnection from './DB/db.connection.js'
 import { globalErrorHandler } from './utils/response.js'
 import authController from './modules/auth/auth.controller.js'
 import userController from './modules/user/user.controller.js'
+import scoutController from './modules/scouting/scout.controller.js'
 import cors from 'cors'
+
 dotenv.config({ path: path.join('./src/config/.env.dev') })
 
 const bootstrap = async () => {
@@ -23,8 +25,9 @@ const bootstrap = async () => {
         res.json({ message: "welcome to Smart Football App ⚽" })
     })
     app.use('/auth', authController)
-    
     app.use('/user', userController)
+    app.use('/scout', scoutController)
+
     app.all('/*dummy', (req, res) => {
         res.status(404).json({ message: "In-valid app routing ❌" })
     })
